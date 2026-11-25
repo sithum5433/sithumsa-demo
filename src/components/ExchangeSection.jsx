@@ -9,9 +9,11 @@ import {
   UploadCloud,
 } from 'lucide-react';
 import { apiRequest } from '../api/client.js';
+import { useLang } from '../context/LanguageContext.jsx';
 import { buildWhatsAppUrl, formatCurrency } from '../utils/format.js';
 
 export function ExchangeSection({ vehicles, business, selectedVehicle, onNotify }) {
+  const { t } = useLang();
   const currency = business?.currency_symbol || 'Rs.';
 
   const [form, setForm] = useState({
@@ -106,13 +108,13 @@ export function ExchangeSection({ vehicles, business, selectedVehicle, onNotify 
         <div className="lg:col-span-5">
           <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.22em] text-[#9A7418] uppercase">
             <Repeat className="h-3.5 w-3.5" />
-            Seamless Upgrade &amp; Direct Buyout
+            {t('ex_eyebrow')}
           </div>
           <h2 className="font-serif-lux mt-2 text-2xl sm:text-3xl font-bold text-slate-950 lg:text-4xl">
-            Turn Your Current Car Into Instant Equity
+            {t('ex_title')}
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-            Upgrade into any vehicle on our floor without the stress of private classifieds. Upload photos securely (we automatically strip location/EXIF metadata) or send them straight via WhatsApp.
+            {t('ex_sub')}
           </p>
 
           <div className="mt-6 space-y-3.5">

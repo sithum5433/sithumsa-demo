@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { Lock, RotateCcw, Store } from 'lucide-react';
 import { apiRequest, setCsrfToken } from './api/client.js';
 import { resetDemoData } from './api/demoBackend.js';
+import { LanguageProvider } from './context/LanguageContext.jsx';
 import { Navbar } from './components/Navbar.jsx';
 import { Hero } from './components/Hero.jsx';
 import { LuxuryPromise } from './components/LuxuryPromise.jsx';
@@ -15,18 +16,21 @@ import { HappyCustomersReviews } from './components/HappyCustomersReviews.jsx';
 import { Footer } from './components/Footer.jsx';
 import { MobileBottomBar } from './components/MobileBottomBar.jsx';
 import { ToastBanner } from './components/Toast.jsx';
-import { AdminGate } from './admin/AdminGate.jsx';
-import { AdminLayout } from './admin/AdminLayout.jsx';
-import { DashboardTab } from './admin/DashboardTab.jsx';
-import { InventoryTab } from './admin/InventoryTab.jsx';
-import { PosTab } from './admin/PosTab.jsx';
-import { InvoicesTab } from './admin/InvoicesTab.jsx';
-import { ReportsTab } from './admin/ReportsTab.jsx';
-import { InquiriesTab } from './admin/InquiriesTab.jsx';
-import { ExchangesTab } from './admin/ExchangesTab.jsx';
-import { CustomersTab } from './admin/CustomersTab.jsx';
-import { SecurityBackupsTab } from './admin/SecurityBackupsTab.jsx';
-import { SettingsTab } from './admin/SettingsTab.jsx';
+
+const AdminGate = lazy(() => import('./admin/AdminGate.jsx').then((m) => ({ default: m.AdminGate })));
+const AdminLayout = lazy(() => import('./admin/AdminLayout.jsx').then((m) => ({ default: m.AdminLayout })));
+const DashboardTab = lazy(() => import('./admin/DashboardTab.jsx').then((m) => ({ default: m.DashboardTab })));
+const InventoryTab = lazy(() => import('./admin/InventoryTab.jsx').then((m) => ({ default: m.InventoryTab })));
+const PosTab = lazy(() => import('./admin/PosTab.jsx').then((m) => ({ default: m.PosTab })));
+const InvoicesTab = lazy(() => import('./admin/InvoicesTab.jsx').then((m) => ({ default: m.InvoicesTab })));
+const ReportsTab = lazy(() => import('./admin/ReportsTab.jsx').then((m) => ({ default: m.ReportsTab })));
+const InquiriesTab = lazy(() => import('./admin/InquiriesTab.jsx').then((m) => ({ default: m.InquiriesTab })));
+const ExchangesTab = lazy(() => import('./admin/ExchangesTab.jsx').then((m) => ({ default: m.ExchangesTab })));
+const CustomersTab = lazy(() => import('./admin/CustomersTab.jsx').then((m) => ({ default: m.CustomersTab })));
+const SecurityBackupsTab = lazy(() =>
+  import('./admin/SecurityBackupsTab.jsx').then((m) => ({ default: m.SecurityBackupsTab }))
+);
+const SettingsTab = lazy(() => import('./admin/SettingsTab.jsx').then((m) => ({ default: m.SettingsTab })));
 
 export default function App() {
   const [routeMode, setRouteMode] = useState(() =>
@@ -277,18 +281,20 @@ export default function App() {
     }
   };
 
+  const suspenseFallback = (
+    <div className="flex min-h-screen items-center justify-center bg-[#05070B] text-sm text-slate-300">
+      Loading Executive Portal...
+    </div>
+  );
+
   if (routeMode === 'admin') {
     if (authState.loading) {
-      return (
-        <div className="flex min-h-screen items-center justify-center bg-[#05070B] text-sm text-slate-300">
-          Loading Executive Portal...
-        </div>
-      );
+      return suspenseFallback;
     }
 
     if (!authState.authenticated) {
       return (
-        <>
+        <Suspense fallback={suspenseFallback}>
           {demoRibbon}
           <AdminGate
             authState={authState}
@@ -303,7 +309,7 @@ export default function App() {
             onBackToStorefront={() => navigateMode('public')}
           />
           <ToastBanner toast={toast} onDismiss={() => setToast(null)} />
-        </>
+        </Suspense>
       );
     }
 
@@ -318,7 +324,7 @@ export default function App() {
     };
 
     return (
-      <>
+      <Suspense fallback={suspenseFallback}>
         {demoRibbon}
         <AdminLayout
           activeTab={adminTab}
@@ -406,130 +412,132 @@ export default function App() {
           )}
         </AdminLayout>
         <ToastBanner toast={toast} onDismiss={() => setToast(null)} />
-      </>
+      </Suspense>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F6F2]">
-      {demoRibbon}
-      <Navbar
-        business={publicData.business}
-        shortlistCount={shortlistIds.length}
-        onShowShortlist={() => {
-          setQuickFilter({ onlySaved: true, ts: Date.now() });
-          scrollToSection('inventory');
-        }}
-        onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh || null })}
-      />
-
-      <main className="flex-1">
-        <Hero
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col bg-[#F7F6F2]">
+        {demoRibbon}
+        <Navbar
           business={publicData.business}
-          vehicleCount={publicData.vehicles.length}
-          handoverCount={publicData.reviews.filter((r) => r.photo_url).length}
-          soldCount={publicData.soldCount || 0}
+          shortlistCount={shortlistIds.length}
+          onShowShortlist={() => {
+            setQuickFilter({ onlySaved: true, ts: Date.now() });
+            scrollToSection('inventory');
+          }}
           onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh || null })}
         />
 
-        <LuxuryPromise
-          onSelectQuickFilter={(f) => {
-            setQuickFilter({ ...f, ts: Date.now() });
-            scrollToSection('inventory');
-          }}
+        <main className="flex-1">
+          <Hero
+            business={publicData.business}
+            vehicleCount={publicData.vehicles.length}
+            handoverCount={publicData.reviews.filter((r) => r.photo_url).length}
+            soldCount={publicData.soldCount || 0}
+            onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh || null })}
+          />
+
+          <LuxuryPromise
+            onSelectQuickFilter={(f) => {
+              setQuickFilter({ ...f, ts: Date.now() });
+              scrollToSection('inventory');
+            }}
+          />
+
+          {loadingPublic ? (
+            <div className="mx-auto max-w-7xl px-4 py-16 text-center text-sm text-slate-500">
+              Loading curated showroom collection...
+            </div>
+          ) : (
+            <>
+              <VehicleCatalog
+                vehicles={publicData.vehicles}
+                business={publicData.business}
+                quickFilter={quickFilter}
+                shortlistIds={shortlistIds}
+                compareIds={compareIds}
+                onToggleShortlist={toggleShortlist}
+                onToggleCompare={toggleCompare}
+                onSelectVehicle={(v) => setActiveVehicleModal(v)}
+                onCalculateLease={(v) => {
+                  setLeaseTargetVehicle(v);
+                  scrollToSection('leasing');
+                }}
+                onExchangeForVehicle={(v) => {
+                  setExchangeTargetVehicle(v);
+                  scrollToSection('exchange');
+                }}
+                onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh })}
+              />
+
+              <LeasingCalculator
+                vehicles={publicData.vehicles}
+                business={publicData.business}
+                selectedVehicle={leaseTargetVehicle}
+              />
+
+              <ExchangeSection
+                vehicles={publicData.vehicles}
+                business={publicData.business}
+                selectedVehicle={exchangeTargetVehicle}
+                onNotify={showToast}
+              />
+
+              <HappyCustomersReviews
+                reviews={publicData.reviews}
+                onNotify={showToast}
+              />
+            </>
+          )}
+        </main>
+
+        <Footer
+          business={publicData.business}
+          onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh || null })}
         />
 
-        {loadingPublic ? (
-          <div className="mx-auto max-w-7xl px-4 py-16 text-center text-sm text-slate-500">
-            Loading curated showroom collection...
-          </div>
-        ) : (
-          <>
-            <VehicleCatalog
-              vehicles={publicData.vehicles}
-              business={publicData.business}
-              quickFilter={quickFilter}
-              shortlistIds={shortlistIds}
-              compareIds={compareIds}
-              onToggleShortlist={toggleShortlist}
-              onToggleCompare={toggleCompare}
-              onSelectVehicle={(v) => setActiveVehicleModal(v)}
-              onCalculateLease={(v) => {
-                setLeaseTargetVehicle(v);
-                scrollToSection('leasing');
-              }}
-              onExchangeForVehicle={(v) => {
-                setExchangeTargetVehicle(v);
-                scrollToSection('exchange');
-              }}
-              onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh })}
-            />
+        <MobileBottomBar
+          business={publicData.business}
+          onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh || null })}
+        />
 
-            <LeasingCalculator
-              vehicles={publicData.vehicles}
-              business={publicData.business}
-              selectedVehicle={leaseTargetVehicle}
-            />
+        <CompareBarAndModal
+          compareIds={compareIds}
+          vehicles={publicData.vehicles}
+          business={publicData.business}
+          onToggleCompare={toggleCompare}
+          onClear={() => setCompareIds([])}
+          onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh })}
+        />
 
-            <ExchangeSection
-              vehicles={publicData.vehicles}
-              business={publicData.business}
-              selectedVehicle={exchangeTargetVehicle}
-              onNotify={showToast}
-            />
+        <BookingModal
+          open={bookingModal.open}
+          vehicle={bookingModal.vehicle}
+          vehicles={publicData.vehicles}
+          business={publicData.business}
+          onClose={() => setBookingModal({ open: false, vehicle: null })}
+          onNotify={showToast}
+        />
 
-            <HappyCustomersReviews
-              reviews={publicData.reviews}
-              onNotify={showToast}
-            />
-          </>
-        )}
-      </main>
+        <VehicleModal
+          vehicle={activeVehicleModal}
+          business={publicData.business}
+          onClose={() => setActiveVehicleModal(null)}
+          onCalculateLease={(v) => {
+            setLeaseTargetVehicle(v);
+            scrollToSection('leasing');
+          }}
+          onExchangeForVehicle={(v) => {
+            setExchangeTargetVehicle(v);
+            scrollToSection('exchange');
+          }}
+          onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh })}
+        />
 
-      <Footer
-        business={publicData.business}
-        onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh || null })}
-      />
-
-      <MobileBottomBar
-        business={publicData.business}
-        onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh || null })}
-      />
-
-      <CompareBarAndModal
-        compareIds={compareIds}
-        vehicles={publicData.vehicles}
-        business={publicData.business}
-        onToggleCompare={toggleCompare}
-        onClear={() => setCompareIds([])}
-        onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh })}
-      />
-
-      <BookingModal
-        open={bookingModal.open}
-        vehicle={bookingModal.vehicle}
-        vehicles={publicData.vehicles}
-        business={publicData.business}
-        onClose={() => setBookingModal({ open: false, vehicle: null })}
-        onNotify={showToast}
-      />
-
-      <VehicleModal
-        vehicle={activeVehicleModal}
-        business={publicData.business}
-        onClose={() => setActiveVehicleModal(null)}
-        onCalculateLease={(v) => {
-          setLeaseTargetVehicle(v);
-          scrollToSection('leasing');
-        }}
-        onExchangeForVehicle={(v) => {
-          setExchangeTargetVehicle(v);
-          scrollToSection('exchange');
-        }}
-        onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh })}
-      />
-
-      <ToastBanner toast={toast} onDismiss={() => setToast(null)} />
-    </div>
+        <ToastBanner toast={toast} onDismiss={() => setToast(null)} />
+      </div>
+    </LanguageProvider>
   );
 }

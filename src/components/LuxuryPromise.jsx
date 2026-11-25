@@ -1,6 +1,8 @@
 import { Award, Clock, FileCheck2, Repeat, Sparkles } from 'lucide-react';
+import { useLang } from '../context/LanguageContext.jsx';
 
 export function LuxuryPromise({ onSelectQuickFilter }) {
+  const { t } = useLang();
   const pillars = [
     {
       icon: FileCheck2,
@@ -38,16 +40,16 @@ export function LuxuryPromise({ onSelectQuickFilter }) {
         <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:pb-8 lg:flex-row lg:items-end">
           <div>
             <div className="text-[11px] font-bold tracking-[0.22em] text-[#E5C158] uppercase">
-              The Sithumsa Standard
+              {t('promise_eyebrow')}
             </div>
             <h2 className="font-serif-lux mt-2 text-2xl font-bold text-white sm:text-3xl">
-              Why Discerning Buyers Never Compromise Here
+              {t('promise_title')}
             </h2>
           </div>
           <div className="-mx-4 flex flex-nowrap items-center gap-2 overflow-x-auto no-scrollbar px-4 sm:mx-0 sm:flex-wrap sm:px-0">
             <span className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-slate-400 mr-1">
               <Sparkles className="h-3.5 w-3.5 text-[#E5C158]" />
-              Instant Finder:
+              {t('promise_finder')}
             </span>
             {budgetShortcuts.map((s) => (
               <button

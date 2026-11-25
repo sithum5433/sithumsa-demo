@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Award, Calendar, MessageSquarePlus, Quote, Star } from 'lucide-react';
 import { apiRequest } from '../api/client.js';
+import { useLang } from '../context/LanguageContext.jsx';
 import { assetUrl } from '../utils/format.js';
 
 export function HappyCustomersReviews({ reviews, onNotify }) {
+  const { t } = useLang();
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
@@ -42,13 +44,13 @@ export function HappyCustomersReviews({ reviews, onNotify }) {
           <div>
             <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.22em] text-[#9A7418] uppercase">
               <Award className="h-3.5 w-3.5" />
-              Showroom Handover Moments
+              {t('rev_eyebrow')}
             </div>
             <h2 className="font-serif-lux mt-2 text-2xl sm:text-3xl font-bold text-slate-950 lg:text-4xl">
-              Proud Sithumsa Owners &amp; Verified Stories
+              {t('rev_title')}
             </h2>
             <p className="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
-              Join hundreds of families, executives, and fleet partners who chose transparent inspection and effortless leasing.
+              {t('rev_sub')}
             </p>
           </div>
           <button
@@ -57,7 +59,7 @@ export function HappyCustomersReviews({ reviews, onNotify }) {
             className="btn-secondary w-full sm:w-auto shrink-0"
           >
             <MessageSquarePlus className="h-4 w-4 text-[#9A7418]" />
-            {showForm ? 'Close Review Form' : 'Share Your Story'}
+            {showForm ? t('rev_close') : t('rev_share')}
           </button>
         </div>
 

@@ -15,6 +15,7 @@ import {
   SlidersHorizontal,
   Tag,
 } from 'lucide-react';
+import { useLang } from '../context/LanguageContext.jsx';
 import {
   buildWhatsAppUrl,
   formatCurrency,
@@ -39,6 +40,7 @@ export function VehicleCatalog({
   onExchangeForVehicle,
   onBookViewing,
 }) {
+  const { t } = useLang();
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
   const [condition, setCondition] = useState('All');
@@ -93,13 +95,13 @@ export function VehicleCatalog({
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
           <div className="text-[11px] font-bold tracking-[0.22em] text-[#9A7418] uppercase">
-            Curated Showroom Collection
+            {t('cat_eyebrow')}
           </div>
           <h2 className="font-serif-lux mt-2 text-2xl sm:text-3xl font-bold text-slate-950 lg:text-4xl">
-            Available Luxury, Retail &amp; Wholesale Fleet
+            {t('cat_title')}
           </h2>
           <p className="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
-            Every vehicle is inspected and ready for immediate delivery, same-day leasing, or trade-in upgrade. Compare up to 3 vehicles side by side or reserve a VIP test drive.
+            {t('cat_sub')}
           </p>
         </div>
 
@@ -111,7 +113,7 @@ export function VehicleCatalog({
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search make, model, stock ID..."
+              placeholder={t('cat_search')}
               className="input-field w-full pl-10 sm:w-64"
             />
           </div>
@@ -335,7 +337,7 @@ export function VehicleCatalog({
                   {/* Price + Monthly Lease Affordability Anchor */}
                   <div className="mt-3.5 rounded-2xl border border-slate-200/80 bg-[#FAF9F5] p-3.5">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <span className="text-xs font-semibold text-slate-500">Showroom Price</span>
+                      <span className="text-xs font-semibold text-slate-500">{t('cat_price')}</span>
                       <span className="font-display text-lg sm:text-xl font-extrabold text-slate-950 tabular-nums">
                         {formatCurrency(vehicle.retail_price, currencySymbol)}
                       </span>
@@ -343,7 +345,7 @@ export function VehicleCatalog({
                     {vehicle.leasing_eligible ? (
                       <div className="mt-1.5 flex items-center justify-between border-t border-slate-200/70 pt-1.5 text-xs">
                         <span className="font-medium text-slate-600">
-                          Or Lease ({defaultDownPct}% down)
+                          {t('cat_or_lease')} ({defaultDownPct}%)
                         </span>
                         <button
                           type="button"
@@ -358,7 +360,7 @@ export function VehicleCatalog({
                       <div className="mt-1 flex items-center justify-between text-[11px] text-emerald-700">
                         <span className="inline-flex items-center gap-1 font-semibold">
                           <Tag className="h-3 w-3" />
-                          Trade / Wholesale
+                          {t('cat_wholesale')}
                         </span>
                         <span className="font-bold tabular-nums">
                           {formatCurrency(vehicle.wholesale_price, currencySymbol)}
@@ -397,14 +399,14 @@ export function VehicleCatalog({
                       className="btn-primary py-2.5 text-xs"
                     >
                       <CalendarCheck2 className="h-3.5 w-3.5" />
-                      Book Test Drive
+                      {t('cat_book')}
                     </button>
                     <button
                       type="button"
                       onClick={() => onSelectVehicle(vehicle)}
                       className="btn-dark py-2.5 text-xs"
                     >
-                      Specs &amp; PDF
+                      {t('cat_specs')}
                     </button>
                   </div>
                   <div className="mt-2 grid grid-cols-3 gap-1.5">
@@ -414,7 +416,7 @@ export function VehicleCatalog({
                       className="btn-secondary py-2 px-2 text-[11px]"
                     >
                       <Calculator className="h-3.5 w-3.5 text-[#9A7418]" />
-                      Lease
+                      {t('cat_lease')}
                     </button>
                     <button
                       type="button"
@@ -422,7 +424,7 @@ export function VehicleCatalog({
                       className="btn-secondary py-2 px-2 text-[11px]"
                     >
                       <Repeat className="h-3.5 w-3.5 text-[#9A7418]" />
-                      Exchange
+                      {t('cat_exchange')}
                     </button>
                     <a
                       href={waUrl}
@@ -431,7 +433,7 @@ export function VehicleCatalog({
                       className="btn-whatsapp py-2 px-2 text-[11px]"
                     >
                       <MessageCircle className="h-3.5 w-3.5" />
-                      Chat
+                      {t('cat_chat')}
                     </a>
                   </div>
                 </div>

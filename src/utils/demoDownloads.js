@@ -1,5 +1,3 @@
-import { zipSync, strToU8 } from 'fflate';
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { getDemoStateSnapshot } from '../api/demoBackend.js';
 
 const A4_W = 595.28;
@@ -7,18 +5,22 @@ const A4_H = 841.89;
 const MX = 42;
 const CW = A4_W - MX * 2;
 
-const COL = {
-  obsidian: rgb(11 / 255, 15 / 255, 23 / 255),
-  slate800: rgb(30 / 255, 41 / 255, 59 / 255),
-  slate600: rgb(71 / 255, 85 / 255, 105 / 255),
-  slate400: rgb(148 / 255, 163 / 255, 184 / 255),
-  slate200: rgb(226 / 255, 232 / 255, 240 / 255),
-  slate50: rgb(248 / 255, 250 / 255, 252 / 255),
-  gold: rgb(198 / 255, 154 / 255, 69 / 255),
-  goldLight: rgb(253 / 255, 246 / 255, 226 / 255),
-  emerald: rgb(5 / 255, 150 / 255, 105 / 255),
-  white: rgb(1, 1, 1),
-};
+async function loadPdfToolkit() {
+  const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
+  const COL = {
+    obsidian: rgb(11 / 255, 15 / 255, 23 / 255),
+    slate800: rgb(30 / 255, 41 / 255, 59 / 255),
+    slate600: rgb(71 / 255, 85 / 255, 105 / 255),
+    slate400: rgb(148 / 255, 163 / 255, 184 / 255),
+    slate200: rgb(226 / 255, 232 / 255, 240 / 255),
+    slate50: rgb(248 / 255, 250 / 255, 252 / 255),
+    gold: rgb(198 / 255, 154 / 255, 69 / 255),
+    goldLight: rgb(253 / 255, 246 / 255, 226 / 255),
+    emerald: rgb(5 / 255, 150 / 255, 105 / 255),
+    white: rgb(1, 1, 1),
+  };
+  return { PDFDocument, StandardFonts, COL };
+}
 
 function safeWinAnsi(val) {
   if (val === null || val === undefined) return '';
@@ -44,7 +46,7 @@ function fmtMoney(amount, symbol = 'Rs.', decimals = 2) {
   );
 }
 
-function drawRight(page, text, rightX, y, font, size, color = COL.obsidian) {
+function drawRight(page, text, rightX, y, font, size, color) {
   const clean = safeWinAnsi(text);
   const w = font.widthOfTextAtSize(clean, size);
   page.drawText(clean, { x: rightX - w, y, size, font, color });
@@ -80,7 +82,7 @@ function triggerDownload(blob, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-function drawBanner(page, fonts, business, rightTitle, rightSub, badge) {
+function drawBanner(page, fonts, COL, business, rightTitle, rightSub, badge) {
   page.drawRectangle({ x: 0, y: A4_H - 106, width: A4_W, height: 106, color: COL.obsidian });
   page.drawRectangle({ x: 0, y: A4_H - 110, width: A4_W, height: 4, color: COL.gold });
 
@@ -123,6 +125,7 @@ function drawBanner(page, fonts, business, rightTitle, rightSub, badge) {
 }
 
 export async function downloadInvoicePdf(invoice, business) {
+  const { PDFDocument, StandardFonts, COL } = await loadPdfToolkit();
   const doc = await PDFDocument.create();
   const page = doc.addPage([A4_W, A4_H]);
   const fonts = {
@@ -131,7 +134,7 @@ export async function downloadInvoicePdf(invoice, business) {
   };
   const currency = business?.currency_symbol || 'Rs.';
 
-  drawBanner(page, fonts, business, 'VEHICLE SALES INVOICE', invoice.invoice_number, `${invoice.sale_type} | ${invoice.payment_status}`);
+  drawBanner(page, fonts, COL, business, 'VEHICLE SALES INVOICE', invoice.invoice_number, `${invoice.sale_type} | ${invoice.payment_status}`);
 
   let y = A4_H - 134;
   const bw = (CW - 14) / 2;
@@ -244,6 +247,7 @@ export async function downloadLeaseQuotePdf({
   processingFee,
   result,
 }) {
+  const { PDFDocument, StandardFonts, COL } = await loadPdfToolkit();
   const doc = await PDFDocument.create();
   const page = doc.addPage([A4_W, A4_H]);
   const fonts = {
@@ -253,7 +257,7 @@ export async function downloadLeaseQuotePdf({
   const currency = business?.currency_symbol || 'Rs.';
   const today = new Date().toISOString().slice(0, 10);
 
-  drawBanner(page, fonts, business, 'OFFICIAL LEASE QUOTATION', `Date: ${today}`, `${tenureMonths} Months Plan`);
+  drawBanner(page, fonts, COL, business, 'OFFICIAL LEASE QUOTATION', `Date: ${today}`, `${tenureMonths} Months Plan`);
 
   let y = A4_H - 140;
   page.drawRectangle({ x: MX, y: y - 76, width: CW, height: 76, color: COL.obsidian });
@@ -296,6 +300,7 @@ export async function downloadLeaseQuotePdf({
 }
 
 export async function downloadVehicleSpecPdf(vehicle, business) {
+  const { PDFDocument, StandardFonts, COL } = await loadPdfToolkit();
   const doc = await PDFDocument.create();
   const page = doc.addPage([A4_W, A4_H]);
   const fonts = {
@@ -304,7 +309,7 @@ export async function downloadVehicleSpecPdf(vehicle, business) {
   };
   const currency = business?.currency_symbol || 'Rs.';
 
-  drawBanner(page, fonts, business, 'VEHICLE SPECIFICATION SHEET', vehicle.stock_code, `${vehicle.condition} | ${vehicle.status}`);
+  drawBanner(page, fonts, COL, business, 'VEHICLE SPECIFICATION SHEET', vehicle.stock_code, `${vehicle.condition} | ${vehicle.status}`);
 
   let y = A4_H - 134;
   page.drawText(safeWinAnsi(`${vehicle.year} ${vehicle.title}`).slice(0, 48), { x: MX, y, size: 16, font: fonts.bold, color: COL.obsidian });
@@ -379,7 +384,8 @@ export function downloadSalesCsv(from, to) {
   triggerDownload(blob, `sithumsa-sales-${from}-to-${to}.csv`);
 }
 
-export function downloadDemoBackupZip() {
+export async function downloadDemoBackupZip() {
+  const { zipSync, strToU8 } = await import('fflate');
   const state = getDemoStateSnapshot();
   const zipped = zipSync({ 'sithumsa-demo-state.json': strToU8(JSON.stringify(state, null, 2)) }, { level: 1 });
   const today = new Date().toISOString().slice(0, 10);

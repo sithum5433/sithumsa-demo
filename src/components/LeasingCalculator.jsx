@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Calculator, CheckCircle2, FileDown, MessageCircle, Percent, ShieldCheck } from 'lucide-react';
+import { useLang } from '../context/LanguageContext.jsx';
 import { buildWhatsAppUrl, formatCurrency } from '../utils/format.js';
 import { calculateLeasing } from '../utils/leasing.js';
 import { downloadLeaseQuotePdf } from '../utils/demoDownloads.js';
@@ -7,6 +8,7 @@ import { downloadLeaseQuotePdf } from '../utils/demoDownloads.js';
 const TENURE_OPTIONS = [12, 24, 36, 48, 60, 72];
 
 export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
+  const { t } = useLang();
   const defaultRate = Number(business?.default_interest_rate ?? 13.5);
   const defaultDownPct = Number(business?.default_down_payment_pct ?? 25);
   const defaultMonths = Number(business?.default_lease_months ?? 48);
@@ -78,13 +80,13 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.22em] text-[#E5C158] uppercase">
             <Calculator className="h-3.5 w-3.5" />
-            Tailored Executive Leasing Studio
+            {t('lease_eyebrow')}
           </div>
           <h2 className="font-serif-lux mt-2 text-2xl sm:text-3xl font-bold text-white lg:text-4xl">
-            Structure Your Ideal Monthly Plan
+            {t('lease_title')}
           </h2>
           <p className="mt-2 text-sm text-slate-300 sm:text-base">
-            Select any showroom vehicle or enter a custom budget. Combine your down payment and old-vehicle exchange value, then download an official PDF quotation instantly.
+            {t('lease_sub')}
           </p>
         </div>
 
@@ -303,7 +305,7 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
                   className="btn-whatsapp w-full py-3.5 text-xs"
                 >
                   <MessageCircle className="h-4 w-4" />
-                  WhatsApp Quote
+                  {t('lease_wa')}
                 </a>
                 <button
                   type="button"
@@ -324,7 +326,7 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
                   className="btn-primary w-full py-3.5 text-xs"
                 >
                   <FileDown className="h-4 w-4" />
-                  Download Quote PDF
+                  {t('lease_pdf')}
                 </button>
               </div>
               <div className="flex items-center justify-center gap-4 text-[11px] text-slate-400">

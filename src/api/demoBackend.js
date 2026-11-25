@@ -647,6 +647,26 @@ export async function demoRequest(url, options = {}) {
         published_reviews: state.reviews.filter((r) => r.published).length,
         pending_reviews: state.reviews.filter((r) => !r.published).length,
       },
+      monthlyTrend: (() => {
+        const now = new Date();
+        const buckets = new Map();
+        for (let i = 5; i >= 0; i -= 1) {
+          const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - i, 1));
+          const ym = d.toISOString().slice(0, 7);
+          buckets.set(ym, { month: ym, net_sales: 0, gross_profit: 0, invoice_count: 0 });
+        }
+        for (const inv of nonVoidInvoices) {
+          const ym = String(inv.created_at || '').slice(0, 7);
+          const b = buckets.get(ym);
+          if (b) {
+            const net = Number(inv.net_sales || 0);
+            b.net_sales += net;
+            b.gross_profit += net - Number(inv.cost_snapshot || 0);
+            b.invoice_count += 1;
+          }
+        }
+        return Array.from(buckets.values());
+      })(),
       recentInvoices: state.invoices.slice(0, 5),
       recentExchanges: state.exchanges.slice(0, 5),
     };

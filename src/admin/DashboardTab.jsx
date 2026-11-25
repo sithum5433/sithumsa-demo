@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { formatCurrency } from '../utils/format.js';
 import { downloadDemoBackupZip } from '../utils/demoDownloads.js';
+import { SalesChart } from './SalesChart.jsx';
 
 export function DashboardTab({ dashboard, business, onNavigate }) {
   const currency = business?.currency_symbol || 'Rs.';
@@ -109,6 +110,8 @@ export function DashboardTab({ dashboard, business, onNavigate }) {
           );
         })}
       </div>
+
+      <SalesChart monthlyTrend={dashboard?.monthlyTrend || []} currency={currency} />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">

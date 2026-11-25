@@ -1,17 +1,25 @@
 import { useState } from 'react';
 import { CalendarCheck2, Heart, Menu, MessageCircle, X } from 'lucide-react';
+import { useLang } from '../context/LanguageContext.jsx';
 import { buildWhatsAppUrl } from '../utils/format.js';
 
 export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookViewing }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { lang, setLang, t } = useLang();
 
   const navLinks = [
-    { href: '#inventory', label: 'Showroom' },
-    { href: '#promise', label: 'Why Sithumsa' },
-    { href: '#leasing', label: 'Leasing Studio' },
-    { href: '#exchange', label: 'Trade-In' },
-    { href: '#reviews', label: 'Deliveries' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#inventory', label: t('nav_showroom') },
+    { href: '#promise', label: t('nav_why') },
+    { href: '#leasing', label: t('nav_leasing') },
+    { href: '#exchange', label: t('nav_exchange') },
+    { href: '#reviews', label: t('nav_deliveries') },
+    { href: '#contact', label: t('nav_contact') },
+  ];
+
+  const langOptions = [
+    { id: 'en', label: 'EN' },
+    { id: 'si', label: 'සිං' },
+    { id: 'ta', label: 'தமி' },
   ];
 
   const whatsappUrl = buildWhatsAppUrl(
@@ -45,7 +53,21 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
         </nav>
 
         {/* Desktop Actions */}
-        <div className="hidden items-center gap-2.5 md:flex">
+        <div className="hidden items-center gap-2 md:flex">
+          <div className="inline-flex rounded-full border border-white/15 bg-white/5 p-0.5 text-[11px] font-bold">
+            {langOptions.map((o) => (
+              <button
+                key={o.id}
+                type="button"
+                onClick={() => setLang(o.id)}
+                className={`rounded-full px-2 py-1 transition cursor-pointer ${
+                  lang === o.id ? 'bg-[#D4AF37] text-slate-950' : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                {o.label}
+              </button>
+            ))}
+          </div>
           {shortlistCount > 0 && (
             <button
               type="button"
@@ -53,7 +75,7 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
               className="inline-flex items-center gap-1.5 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-3 py-2 text-xs font-bold text-[#F6E7C1] transition hover:bg-[#D4AF37]/20 cursor-pointer"
             >
               <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" />
-              Saved ({shortlistCount})
+              {t('nav_saved')} ({shortlistCount})
             </button>
           )}
           <button
@@ -62,7 +84,7 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
             className="btn-luxury-outline py-2 px-3.5 text-xs"
           >
             <CalendarCheck2 className="h-3.5 w-3.5 text-[#E5C158]" />
-            Book Viewing
+            {t('nav_book')}
           </button>
           <a
             href={whatsappUrl}
@@ -71,7 +93,7 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
             className="btn-crimson py-2 px-4 text-xs"
           >
             <MessageCircle className="h-3.5 w-3.5" />
-            WhatsApp
+            {t('nav_whatsapp')}
           </a>
         </div>
 
@@ -100,7 +122,7 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="inline-flex items-center justify-center rounded-xl border border-white/15 p-2.5 text-slate-200 transition hover:bg-white/10 md:hidden cursor-pointer"
+            className="inline-flex items-center justify-center rounded-xl border border-white/15 p-2.5 text-slate-200 transition hover:bg-white/10 cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -111,6 +133,23 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
       {/* Mobile Drawer */}
       {mobileOpen && (
         <div className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-white/10 bg-[#05070B] px-4 py-4 md:hidden">
+          <div className="mb-3 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+            <span className="text-[11px] font-semibold text-slate-400">Language</span>
+            <div className="inline-flex gap-1">
+              {langOptions.map((o) => (
+                <button
+                  key={o.id}
+                  type="button"
+                  onClick={() => setLang(o.id)}
+                  className={`rounded-lg px-2.5 py-1 text-xs font-bold cursor-pointer ${
+                    lang === o.id ? 'bg-[#D4AF37] text-slate-950' : 'text-slate-300 hover:bg-white/10'
+                  }`}
+                >
+                  {o.label}
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <a
@@ -132,7 +171,7 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
                 className="btn-luxury-outline py-3 text-xs"
               >
                 <CalendarCheck2 className="h-4 w-4" />
-                Book Viewing
+                {t('nav_book')}
               </button>
               <a
                 href={whatsappUrl}
@@ -141,7 +180,7 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
                 className="btn-crimson py-3 text-xs"
               >
                 <MessageCircle className="h-4 w-4" />
-                WhatsApp
+                {t('nav_whatsapp')}
               </a>
             </div>
           </div>

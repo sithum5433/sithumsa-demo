@@ -1,7 +1,9 @@
 import { CalendarCheck2, Clock, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { useLang } from '../context/LanguageContext.jsx';
 import { buildWhatsAppUrl } from '../utils/format.js';
 
 export function Footer({ business, onBookViewing }) {
+  const { t } = useLang();
   const waUrl = buildWhatsAppUrl(
     business?.whatsapp_number,
     `Hello ${business?.business_name || 'Sithumsa Enterprise'}, I would like to visit your showroom or inquire about a vehicle.`
@@ -32,7 +34,7 @@ export function Footer({ business, onBookViewing }) {
                 className="btn-primary py-2.5 text-xs"
               >
                 <CalendarCheck2 className="h-4 w-4" />
-                Book Private Viewing
+                {t('footer_book')}
               </button>
               <a
                 href={waUrl}
@@ -41,7 +43,7 @@ export function Footer({ business, onBookViewing }) {
                 className="btn-whatsapp py-2.5 text-xs"
               >
                 <MessageCircle className="h-4 w-4" />
-                WhatsApp Concierge
+                {t('footer_wa')}
               </a>
             </div>
           </div>
@@ -49,7 +51,7 @@ export function Footer({ business, onBookViewing }) {
           {/* Contact Details */}
           <div className="md:col-span-4 space-y-3 text-sm">
             <h3 className="font-serif-lux text-sm font-bold tracking-wider text-[#E5C158] uppercase">
-              Showroom &amp; Concierge
+              {t('footer_showroom')}
             </h3>
             <div className="flex items-start gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#E5C158]" />
@@ -80,7 +82,7 @@ export function Footer({ business, onBookViewing }) {
           {/* Quick Navigation */}
           <div className="md:col-span-3 space-y-2.5 text-sm">
             <h3 className="font-serif-lux text-sm font-bold tracking-wider text-[#E5C158] uppercase">
-              Showroom Navigation
+              {t('footer_nav')}
             </h3>
             <ul className="space-y-2 text-slate-400">
               <li>

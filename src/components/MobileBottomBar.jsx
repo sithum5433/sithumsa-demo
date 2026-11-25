@@ -1,7 +1,9 @@
 import { Calculator, CalendarCheck2, MessageCircle, Phone } from 'lucide-react';
+import { useLang } from '../context/LanguageContext.jsx';
 import { buildWhatsAppUrl } from '../utils/format.js';
 
 export function MobileBottomBar({ business, onBookViewing }) {
+  const { t } = useLang();
   const waUrl = buildWhatsAppUrl(
     business?.whatsapp_number,
     `Hello ${business?.business_name || 'Sithumsa Enterprise'}, I am browsing your showroom on mobile and would like quick assistance.`
@@ -18,7 +20,7 @@ export function MobileBottomBar({ business, onBookViewing }) {
           className="flex min-h-[56px] flex-col items-center justify-center gap-1 py-1.5 text-[10px] font-semibold text-slate-200 active:bg-white/10"
         >
           <Phone className="h-4 w-4 text-[#E5C158]" />
-          <span>Call</span>
+          <span>{t('mob_call')}</span>
         </a>
         <a
           href={waUrl}
@@ -27,14 +29,14 @@ export function MobileBottomBar({ business, onBookViewing }) {
           className="flex min-h-[56px] flex-col items-center justify-center gap-1 py-1.5 text-[10px] font-semibold text-emerald-400 active:bg-white/10"
         >
           <MessageCircle className="h-4 w-4" />
-          <span>WhatsApp</span>
+          <span>{t('mob_whatsapp')}</span>
         </a>
         <a
           href="#leasing"
           className="flex min-h-[56px] flex-col items-center justify-center gap-1 py-1.5 text-[10px] font-semibold text-slate-200 active:bg-white/10"
         >
           <Calculator className="h-4 w-4 text-[#E5C158]" />
-          <span>Lease</span>
+          <span>{t('mob_lease')}</span>
         </a>
         <button
           type="button"
@@ -42,7 +44,7 @@ export function MobileBottomBar({ business, onBookViewing }) {
           className="flex min-h-[56px] flex-col items-center justify-center gap-1 bg-gradient-to-r from-[#E5C158] to-[#B88E28] py-1.5 text-[10px] font-extrabold text-slate-950 active:brightness-95 cursor-pointer"
         >
           <CalendarCheck2 className="h-4 w-4" />
-          <span>Book VIP</span>
+          <span>{t('mob_book')}</span>
         </button>
       </div>
     </nav>
