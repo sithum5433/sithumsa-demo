@@ -13,6 +13,7 @@ import { LeasingCalculator } from './components/LeasingCalculator.jsx';
 import { ExchangeSection } from './components/ExchangeSection.jsx';
 import { HappyCustomersReviews } from './components/HappyCustomersReviews.jsx';
 import { Footer } from './components/Footer.jsx';
+import { MobileBottomBar } from './components/MobileBottomBar.jsx';
 import { ToastBanner } from './components/Toast.jsx';
 import { AdminGate } from './admin/AdminGate.jsx';
 import { AdminLayout } from './admin/AdminLayout.jsx';
@@ -205,22 +206,23 @@ export default function App() {
   };
 
   const demoRibbon = (
-    <div className="no-print border-b border-[#D4AF37]/35 bg-[#0A0E17] px-4 py-2 text-xs text-slate-200">
+    <div className="no-print border-b border-[#D4AF37]/35 bg-[#0A0E17] px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs text-slate-200">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <span className="rounded-full bg-[#D4AF37] px-2.5 py-0.5 text-[10px] font-extrabold tracking-wider text-slate-950 uppercase">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="shrink-0 rounded-full bg-[#D4AF37] px-2.5 py-0.5 text-[10px] font-extrabold tracking-wider text-slate-950 uppercase">
             Static Demo
           </span>
-          <span className="text-slate-300">
-            Interactive Static Demo (Browser Storage — No Database)
+          <span className="text-slate-300 truncate sm:whitespace-normal">
+            <span className="hidden sm:inline">Interactive Static Demo (Browser Storage — No Database)</span>
+            <span className="sm:hidden">Browser Demo Mode</span>
           </span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           {routeMode === 'admin' ? (
             <button
               type="button"
               onClick={() => navigateMode('public')}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-3 py-1 text-[11px] font-bold text-[#F6E7C1] hover:bg-[#D4AF37]/20 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-2.5 sm:px-3 py-1 text-[11px] font-bold text-[#F6E7C1] hover:bg-[#D4AF37]/20 cursor-pointer"
             >
               <Store className="h-3.5 w-3.5" />
               Back to Showroom
@@ -229,10 +231,12 @@ export default function App() {
             <button
               type="button"
               onClick={() => navigateMode('admin')}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-3 py-1 text-[11px] font-bold text-[#F6E7C1] hover:bg-[#D4AF37]/20 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-2.5 sm:px-3 py-1 text-[11px] font-bold text-[#F6E7C1] hover:bg-[#D4AF37]/20 cursor-pointer"
             >
               <Lock className="h-3.5 w-3.5" />
-              Open Owner &amp; POS Demo
+              <span>
+                <span className="hidden sm:inline">Open </span>Owner &amp; POS<span className="hidden sm:inline"> Demo</span>
+              </span>
             </button>
           )}
           <button
@@ -241,7 +245,9 @@ export default function App() {
             className="inline-flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-slate-300 hover:bg-white/10 cursor-pointer"
           >
             <RotateCcw className="h-3 w-3" />
-            Reset Demo Data
+            <span>
+              Reset<span className="hidden sm:inline"> Demo Data</span>
+            </span>
           </button>
         </div>
       </div>
@@ -481,6 +487,11 @@ export default function App() {
       </main>
 
       <Footer
+        business={publicData.business}
+        onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh || null })}
+      />
+
+      <MobileBottomBar
         business={publicData.business}
         onBookViewing={(veh) => setBookingModal({ open: true, vehicle: veh || null })}
       />

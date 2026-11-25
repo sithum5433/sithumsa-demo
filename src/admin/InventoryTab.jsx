@@ -211,8 +211,76 @@ export function InventoryTab({ vehicles, business, onReload, onNotify }) {
         </button>
       </div>
 
-      {/* Table */}
-      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs">
+      {/* Mobile Vehicle Cards */}
+      <div className="space-y-3 md:hidden">
+        {filtered.map((v) => (
+          <div key={v.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xs">
+            <div className="flex gap-3">
+              <img
+                src={getPrimaryPhoto(v)}
+                alt=""
+                className="h-16 w-24 shrink-0 rounded-xl object-cover bg-slate-900"
+              />
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center justify-between gap-1.5">
+                  <span className="font-mono text-[11px] font-bold text-[#9A7418]">{v.stock_code}</span>
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                      v.status === 'Available'
+                        ? 'bg-emerald-100 text-emerald-800'
+                        : v.status === 'Sold'
+                        ? 'bg-slate-200 text-slate-700'
+                        : 'bg-amber-100 text-amber-900'
+                    }`}
+                  >
+                    {v.status}
+                  </span>
+                </div>
+                <div className="mt-0.5 text-sm font-bold text-slate-900 leading-snug">
+                  {v.year} {v.title}
+                </div>
+                <div className="mt-0.5 text-[11px] text-slate-500">
+                  {v.condition} • {formatMileage(v.mileage_km)} • {v.fuel_type}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-3 flex flex-wrap items-baseline justify-between gap-2 border-t border-slate-100 pt-2.5 text-xs">
+              <div>
+                <div className="font-bold text-slate-900 tabular-nums">
+                  {formatCurrency(v.retail_price, currency)}
+                </div>
+                {v.wholesale_price > 0 && (
+                  <div className="text-[11px] font-semibold text-emerald-700 tabular-nums">
+                    WS: {formatCurrency(v.wholesale_price, currency)}
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => openEdit(v)}
+                  className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-800 hover:bg-slate-100 cursor-pointer"
+                >
+                  <Edit3 className="inline h-3.5 w-3.5 mr-1" />
+                  Edit / Photos
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(v)}
+                  className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-rose-700 hover:bg-rose-100 cursor-pointer"
+                  aria-label="Delete vehicle"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Table */}
+      <div className="hidden md:block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="border-b border-slate-200 bg-slate-50 text-slate-600">
@@ -302,8 +370,8 @@ export function InventoryTab({ vehicles, business, onReload, onNotify }) {
 
       {/* Add / Edit Modal */}
       {editingVehicle && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 p-4 backdrop-blur-xs">
-          <div className="mx-auto my-6 max-w-4xl rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 p-2 sm:p-4 backdrop-blur-xs">
+          <div className="mx-auto my-3 sm:my-6 max-w-4xl rounded-3xl bg-white p-4 shadow-2xl sm:p-8">
             <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <div>
                 <h3 className="font-display text-xl font-bold text-slate-900">

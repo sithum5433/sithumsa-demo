@@ -76,17 +76,17 @@ export function VehicleModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-950/80 p-0 sm:p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-3xl border border-[#D4AF37]/30 bg-white shadow-2xl"
+        className="relative max-h-[92dvh] w-full max-w-4xl overflow-y-auto rounded-t-3xl sm:rounded-3xl border border-[#D4AF37]/30 bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 rounded-full bg-slate-900/80 p-2 text-white transition hover:bg-slate-900 cursor-pointer"
+          className="fixed sm:sticky md:absolute top-3 right-3 z-20 rounded-full bg-black/80 p-2.5 text-white shadow-lg transition hover:bg-black cursor-pointer"
           aria-label="Close vehicle details"
         >
           <X className="h-5 w-5" />
@@ -192,7 +192,7 @@ export function VehicleModal({
           </div>
 
           {/* Right Specifications */}
-          <div className="p-6 lg:col-span-6 lg:p-7">
+          <div className="p-4 sm:p-6 lg:col-span-6 lg:p-7">
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-950">
                 {vehicle.condition}
@@ -236,11 +236,11 @@ export function VehicleModal({
             <h3 className="mt-5 text-xs font-bold tracking-wider text-slate-500 uppercase">
               Certified Specifications
             </h3>
-            <dl className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+            <dl className="mt-2.5 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-xs">
               {specs.map(([label, value]) => (
                 <div key={label} className="border-b border-slate-100 pb-1.5">
                   <dt className="text-slate-400">{label}</dt>
-                  <dd className="font-semibold text-slate-800">{value}</dd>
+                  <dd className="font-semibold text-slate-800 break-words">{value}</dd>
                 </div>
               ))}
             </dl>

@@ -83,27 +83,27 @@ export function ReportsTab({ business, onNotify }) {
   return (
     <div className="space-y-6">
       {/* Filter & CSV Export Bar */}
-      <div className="flex flex-wrap items-end justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
-        <div className="flex flex-wrap items-end gap-3">
-          <div>
+      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-end justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-xs">
+        <div className="grid grid-cols-1 sm:flex sm:flex-wrap sm:items-end gap-3 w-full sm:w-auto">
+          <div className="w-full sm:w-auto">
             <label className="block text-xs font-semibold text-slate-600">From Date</label>
             <input
               type="date"
               value={from}
               onChange={(e) => setFrom(e.target.value)}
-              className="input-field mt-1"
+              className="input-field mt-1 w-full sm:w-auto text-base sm:text-sm"
             />
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <label className="block text-xs font-semibold text-slate-600">To Date</label>
             <input
               type="date"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              className="input-field mt-1"
+              className="input-field mt-1 w-full sm:w-auto text-base sm:text-sm"
             />
           </div>
-          <button type="button" onClick={loadReport} className="btn-dark py-2.5 text-xs">
+          <button type="button" onClick={loadReport} className="btn-dark w-full sm:w-auto py-2.5 text-xs">
             <BarChart3 className="h-4 w-4" />
             Refresh Report
           </button>
@@ -112,7 +112,7 @@ export function ReportsTab({ business, onNotify }) {
         <button
           type="button"
           onClick={() => downloadSalesCsv(from, to)}
-          className="btn-primary py-2.5 text-xs"
+          className="btn-primary w-full sm:w-auto py-2.5 text-xs"
         >
           <Download className="h-4 w-4" />
           Export Accountant CSV / Excel

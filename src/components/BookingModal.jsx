@@ -56,23 +56,23 @@ export function BookingModal({ open, vehicle, vehicles, business, onClose, onNot
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-950/80 p-0 sm:p-4 backdrop-blur-xs"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-[#D4AF37]/30 bg-white shadow-2xl"
+        className="relative max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-3xl sm:rounded-3xl border border-[#D4AF37]/30 bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between bg-[#07090E] px-6 py-5 text-white">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4AF37]/20 text-[#E5C158]">
+        <div className="sticky top-0 z-10 flex items-center justify-between bg-[#07090E] px-4 py-4 sm:px-6 sm:py-5 text-white">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#D4AF37]/20 text-[#E5C158]">
               <CalendarCheck2 className="h-5 w-5" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="text-[10px] font-bold tracking-[0.2em] text-[#E5C158] uppercase">
                 VIP Showroom Concierge
               </div>
-              <h3 className="font-serif-lux text-lg font-bold text-white">
+              <h3 className="font-serif-lux text-base sm:text-lg font-bold text-white truncate">
                 Reserve Viewing or Request Best Offer
               </h3>
             </div>
@@ -80,14 +80,14 @@ export function BookingModal({ open, vehicle, vehicles, business, onClose, onNot
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full bg-white/10 p-2 text-slate-300 hover:bg-white/20 cursor-pointer"
+            className="shrink-0 rounded-full bg-white/10 p-2.5 text-slate-300 hover:bg-white/20 cursor-pointer"
             aria-label="Close modal"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {confirmed ? (
             <div className="py-4 text-center">
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
@@ -128,7 +128,7 @@ export function BookingModal({ open, vehicle, vehicles, business, onClose, onNot
                 aria-hidden="true"
               />
 
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 {['Test Drive / Viewing', 'Price Negotiation', 'Call Back'].map((kind) => (
                   <button
                     key={kind}

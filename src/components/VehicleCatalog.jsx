@@ -88,14 +88,14 @@ export function VehicleCatalog({
   }, [vehicles, search, category, condition, maxPrice, onlySaved, shortlistIds, sortBy]);
 
   return (
-    <section id="inventory" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <section id="inventory" className="mx-auto max-w-7xl px-4 py-10 sm:py-16 sm:px-6 lg:px-8">
       {/* Editorial Header */}
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
           <div className="text-[11px] font-bold tracking-[0.22em] text-[#9A7418] uppercase">
             Curated Showroom Collection
           </div>
-          <h2 className="font-serif-lux mt-2 text-3xl font-bold text-slate-950 sm:text-4xl">
+          <h2 className="font-serif-lux mt-2 text-2xl sm:text-3xl font-bold text-slate-950 lg:text-4xl">
             Available Luxury, Retail &amp; Wholesale Fleet
           </h2>
           <p className="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
@@ -133,8 +133,8 @@ export function VehicleCatalog({
       </div>
 
       {/* Filter Pills */}
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-5">
-        <div className="flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-col gap-3 border-b border-slate-200 pb-5 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-4">
+        <div className="-mx-4 flex flex-nowrap gap-2 overflow-x-auto no-scrollbar px-4 sm:mx-0 sm:flex-wrap sm:px-0">
           {CATEGORIES.map((cat) => {
             const active = !onlySaved && category === cat;
             return (
@@ -145,7 +145,7 @@ export function VehicleCatalog({
                   setOnlySaved(false);
                   setCategory(cat);
                 }}
-                className={`rounded-full px-4 py-2 text-xs font-bold tracking-wide transition cursor-pointer ${
+                className={`shrink-0 rounded-full px-4 py-2 text-xs font-bold tracking-wide transition cursor-pointer ${
                   active
                     ? 'bg-[#0B0F17] text-[#E5C158] shadow-sm'
                     : 'border border-slate-200 bg-white text-slate-700 hover:border-[#D4AF37]'
@@ -159,7 +159,7 @@ export function VehicleCatalog({
             <button
               type="button"
               onClick={() => setOnlySaved((p) => !p)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition cursor-pointer ${
+              className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition cursor-pointer ${
                 onlySaved
                   ? 'bg-red-700 text-white shadow-sm'
                   : 'border border-red-200 bg-red-50 text-red-700 hover:bg-red-100'
@@ -171,17 +171,17 @@ export function VehicleCatalog({
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="-mx-4 flex flex-nowrap items-center gap-2 overflow-x-auto no-scrollbar px-4 sm:mx-0 sm:flex-wrap sm:px-0">
           {maxPrice > 0 && (
             <button
               type="button"
               onClick={() => setMaxPrice(0)}
-              className="rounded-lg bg-amber-100 px-2.5 py-1.5 text-xs font-bold text-amber-900 cursor-pointer"
+              className="shrink-0 rounded-lg bg-amber-100 px-2.5 py-1.5 text-xs font-bold text-amber-900 cursor-pointer"
             >
               Under {formatCurrency(maxPrice, currencySymbol)} ✕
             </button>
           )}
-          <span className="text-xs font-semibold text-slate-500">Condition:</span>
+          <span className="shrink-0 text-xs font-semibold text-slate-500">Condition:</span>
           {CONDITIONS.map((cond) => {
             const active = condition === cond;
             return (
@@ -189,7 +189,7 @@ export function VehicleCatalog({
                 key={cond}
                 type="button"
                 onClick={() => setCondition(cond)}
-                className={`rounded-lg px-3 py-1.5 text-xs font-bold transition cursor-pointer ${
+                className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition cursor-pointer ${
                   active
                     ? 'bg-[#D4AF37] text-slate-950 shadow-xs'
                     : 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300'
@@ -284,7 +284,7 @@ export function VehicleCatalog({
                     <button
                       type="button"
                       onClick={() => onToggleCompare?.(vehicle.id)}
-                      className={`rounded-full p-2 text-xs backdrop-blur-xs transition cursor-pointer ${
+                      className={`rounded-full p-2.5 text-xs backdrop-blur-xs transition cursor-pointer ${
                         isCompared
                           ? 'bg-[#D4AF37] text-slate-950 shadow'
                           : 'bg-black/55 text-white hover:bg-black/80'
@@ -292,12 +292,12 @@ export function VehicleCatalog({
                       title="Compare side-by-side"
                       aria-label="Compare vehicle"
                     >
-                      <Scale className="h-3.5 w-3.5" />
+                      <Scale className="h-4 w-4" />
                     </button>
                     <button
                       type="button"
                       onClick={() => onToggleShortlist?.(vehicle.id)}
-                      className={`rounded-full p-2 backdrop-blur-xs transition cursor-pointer ${
+                      className={`rounded-full p-2.5 backdrop-blur-xs transition cursor-pointer ${
                         isSaved
                           ? 'bg-white text-red-600 shadow'
                           : 'bg-black/55 text-white hover:bg-black/80'
@@ -305,7 +305,7 @@ export function VehicleCatalog({
                       title="Save to shortlist"
                       aria-label="Save vehicle"
                     >
-                      <Heart className={`h-3.5 w-3.5 ${isSaved ? 'fill-current' : ''}`} />
+                      <Heart className={`h-4 w-4 ${isSaved ? 'fill-current' : ''}`} />
                     </button>
                   </div>
 
@@ -321,22 +321,22 @@ export function VehicleCatalog({
                 </div>
 
                 {/* Card Content */}
-                <div className="flex flex-1 flex-col p-5">
+                <div className="flex flex-1 flex-col p-4 sm:p-5">
                   <div className="text-[11px] font-bold tracking-[0.16em] text-[#9A7418] uppercase">
                     {vehicle.year} • {vehicle.make} • {vehicle.category}
                   </div>
                   <h3
                     onClick={() => onSelectVehicle(vehicle)}
-                    className="font-serif-lux mt-1 cursor-pointer text-xl font-bold leading-snug text-slate-950 transition hover:text-[#9A7418]"
+                    className="font-serif-lux mt-1 cursor-pointer text-lg sm:text-xl font-bold leading-snug text-slate-950 transition hover:text-[#9A7418]"
                   >
                     {vehicle.title}
                   </h3>
 
                   {/* Price + Monthly Lease Affordability Anchor */}
                   <div className="mt-3.5 rounded-2xl border border-slate-200/80 bg-[#FAF9F5] p-3.5">
-                    <div className="flex items-baseline justify-between gap-2">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <span className="text-xs font-semibold text-slate-500">Showroom Price</span>
-                      <span className="font-display text-xl font-extrabold text-slate-950 tabular-nums">
+                      <span className="font-display text-lg sm:text-xl font-extrabold text-slate-950 tabular-nums">
                         {formatCurrency(vehicle.retail_price, currencySymbol)}
                       </span>
                     </div>

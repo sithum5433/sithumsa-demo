@@ -100,15 +100,15 @@ export function ExchangeSection({ vehicles, business, selectedVehicle, onNotify 
   const waUrl = buildWhatsAppUrl(business?.whatsapp_number, quickWhatsAppMsg);
 
   return (
-    <section id="exchange" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+    <section id="exchange" className="mx-auto max-w-7xl px-4 py-12 sm:py-16 sm:px-6 lg:px-8">
+      <div className="grid gap-8 lg:gap-10 lg:grid-cols-12 lg:items-start">
         {/* Left Value Prop */}
         <div className="lg:col-span-5">
           <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.22em] text-[#9A7418] uppercase">
             <Repeat className="h-3.5 w-3.5" />
             Seamless Upgrade &amp; Direct Buyout
           </div>
-          <h2 className="font-serif-lux mt-2 text-3xl font-bold text-slate-950 sm:text-4xl">
+          <h2 className="font-serif-lux mt-2 text-2xl sm:text-3xl font-bold text-slate-950 lg:text-4xl">
             Turn Your Current Car Into Instant Equity
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
@@ -151,7 +151,7 @@ export function ExchangeSection({ vehicles, business, selectedVehicle, onNotify 
         </div>
 
         {/* Right Form */}
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl lg:col-span-7 sm:p-8">
+        <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-xl lg:col-span-7 sm:p-8">
           {submittedResult ? (
             <div className="py-6 text-center">
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">

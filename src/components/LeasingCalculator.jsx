@@ -73,14 +73,14 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
   );
 
   return (
-    <section id="leasing" className="bg-[#07090E] py-18 text-white">
+    <section id="leasing" className="bg-[#07090E] py-12 sm:py-18 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.22em] text-[#E5C158] uppercase">
             <Calculator className="h-3.5 w-3.5" />
             Tailored Executive Leasing Studio
           </div>
-          <h2 className="font-serif-lux mt-2 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="font-serif-lux mt-2 text-2xl sm:text-3xl font-bold text-white lg:text-4xl">
             Structure Your Ideal Monthly Plan
           </h2>
           <p className="mt-2 text-sm text-slate-300 sm:text-base">
@@ -88,10 +88,10 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
           </p>
         </div>
 
-        <div className="mt-9 grid gap-8 lg:grid-cols-12">
+        <div className="mt-7 sm:mt-9 grid gap-6 sm:gap-8 lg:grid-cols-12">
           {/* Controls */}
-          <div className="rounded-3xl border border-white/10 bg-[#0D121D] p-6 shadow-xl lg:col-span-7 sm:p-8">
-            <div className="grid gap-5 sm:grid-cols-2">
+          <div className="rounded-3xl border border-white/10 bg-[#0D121D] p-5 shadow-xl lg:col-span-7 sm:p-8">
+            <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold tracking-wider text-slate-300 uppercase">
                   Select Showroom Vehicle or Custom Amount
@@ -99,7 +99,7 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
                 <select
                   value={vehicleId}
                   onChange={(e) => handleVehicleChange(e.target.value)}
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-3 text-base sm:text-sm text-white focus:border-[#D4AF37] focus:outline-none"
                 >
                   <option value="custom">Custom Vehicle Price</option>
                   {vehicles.map((v) => (
@@ -123,7 +123,7 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
                     setVehicleId('custom');
                     setVehiclePrice(Math.max(0, Number(e.target.value) || 0));
                   }}
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-2.5 text-sm font-semibold text-white tabular-nums focus:border-[#D4AF37] focus:outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-2.5 text-base sm:text-sm font-semibold text-white tabular-nums focus:border-[#D4AF37] focus:outline-none"
                 />
               </div>
 
@@ -137,7 +137,7 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
                   step={50000}
                   value={tradeInCredit}
                   onChange={(e) => setTradeInCredit(Math.max(0, Number(e.target.value) || 0))}
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-2.5 text-sm font-semibold text-white tabular-nums focus:border-[#D4AF37] focus:outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-2.5 text-base sm:text-sm font-semibold text-white tabular-nums focus:border-[#D4AF37] focus:outline-none"
                 />
               </div>
 
@@ -180,7 +180,7 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
                     step={0.5}
                     value={interestRate}
                     onChange={(e) => setInterestRate(Math.max(0, Math.min(50, Number(e.target.value) || 0)))}
-                    className="w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-2.5 pr-9 text-sm font-semibold text-white tabular-nums focus:border-[#D4AF37] focus:outline-none"
+                    className="w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-2.5 pr-9 text-base sm:text-sm font-semibold text-white tabular-nums focus:border-[#D4AF37] focus:outline-none"
                   />
                   <Percent className="pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
                 </div>
@@ -196,7 +196,7 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
                   step={5000}
                   value={processingFee}
                   onChange={(e) => setProcessingFee(Math.max(0, Number(e.target.value) || 0))}
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-2.5 text-sm font-semibold text-white tabular-nums focus:border-[#D4AF37] focus:outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/15 bg-[#07090E] px-3.5 py-2.5 text-base sm:text-sm font-semibold text-white tabular-nums focus:border-[#D4AF37] focus:outline-none"
                 />
               </div>
 
@@ -210,7 +210,7 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
                       key={m}
                       type="button"
                       onClick={() => setTenureMonths(m)}
-                      className={`rounded-xl py-2.5 text-xs font-bold transition cursor-pointer ${
+                      className={`rounded-xl py-3 text-xs font-bold transition cursor-pointer ${
                         tenureMonths === m
                           ? 'bg-[#D4AF37] text-slate-950 shadow-lg shadow-[#D4AF37]/20'
                           : 'border border-white/10 bg-[#07090E] text-slate-300 hover:border-[#D4AF37]/40'
@@ -225,12 +225,12 @@ export function LeasingCalculator({ vehicles, business, selectedVehicle }) {
           </div>
 
           {/* Result Card */}
-          <div className="flex flex-col justify-between rounded-3xl border border-[#D4AF37]/35 bg-gradient-to-br from-[#0F1624] via-[#090D16] to-[#05070B] p-6 shadow-2xl lg:col-span-5 sm:p-8">
+          <div className="flex flex-col justify-between rounded-3xl border border-[#D4AF37]/35 bg-gradient-to-br from-[#0F1624] via-[#090D16] to-[#05070B] p-5 shadow-2xl lg:col-span-5 sm:p-8">
             <div>
               <div className="text-[11px] font-bold tracking-[0.2em] text-[#E5C158] uppercase">
                 Estimated Monthly Installment
               </div>
-              <div className="font-serif-lux mt-2 text-4xl font-bold text-white sm:text-5xl tabular-nums">
+              <div className="font-serif-lux mt-2 text-3xl font-bold text-white sm:text-4xl lg:text-5xl tabular-nums break-words">
                 {formatCurrency(result.monthlyInstallment, currency)}
                 <span className="font-display text-base font-medium text-slate-400"> / mo</span>
               </div>

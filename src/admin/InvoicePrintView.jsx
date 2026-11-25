@@ -19,14 +19,24 @@ export function InvoicePrintView({ invoice, business, onClose }) {
   );
 
   return createPortal(
-    <div className="print-portal-root fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 p-4 backdrop-blur-xs">
+    <div className="print-portal-root fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 p-2 sm:p-4 backdrop-blur-xs">
       <div className="print-only-container mx-auto max-w-3xl rounded-3xl bg-white shadow-2xl">
         {/* Non-print Action Bar */}
-        <div className="no-print flex flex-wrap items-center justify-between gap-3 rounded-t-3xl border-b border-slate-200 bg-slate-900 px-6 py-4 text-white">
-          <div className="font-display text-sm font-bold">
-            Invoice Preview — {invoice.invoice_number}
+        <div className="no-print flex flex-col gap-3 rounded-t-3xl border-b border-slate-200 bg-slate-900 px-4 py-4 sm:px-6 text-white sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center justify-between gap-2">
+            <div className="font-display text-sm font-bold">
+              Invoice Preview — {invoice.invoice_number}
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-xl bg-white/10 p-2 text-slate-200 hover:bg-white/20 sm:hidden cursor-pointer"
+              aria-label="Close invoice preview"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
             <a
               href={waUrl}
               target="_blank"
@@ -47,7 +57,7 @@ export function InvoicePrintView({ invoice, business, onClose }) {
             <button
               type="button"
               onClick={() => window.print()}
-              className="btn-primary py-2 text-xs"
+              className="btn-primary col-span-2 sm:col-span-1 py-2 text-xs"
             >
               <Printer className="h-4 w-4" />
               Print Invoice
@@ -55,7 +65,7 @@ export function InvoicePrintView({ invoice, business, onClose }) {
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl bg-white/10 p-2 text-slate-200 hover:bg-white/20 cursor-pointer"
+              className="hidden sm:inline-flex rounded-xl bg-white/10 p-2 text-slate-200 hover:bg-white/20 cursor-pointer"
               aria-label="Close invoice preview"
             >
               <X className="h-4 w-4" />
@@ -64,7 +74,7 @@ export function InvoicePrintView({ invoice, business, onClose }) {
         </div>
 
         {/* Printable Invoice Sheet */}
-        <div className="p-8 text-slate-900 sm:p-10">
+        <div className="p-4 text-slate-900 sm:p-10 print:p-0">
           {/* Header */}
           <div className="flex flex-col justify-between gap-6 border-b-2 border-slate-900 pb-6 sm:flex-row">
             <div>
@@ -153,8 +163,8 @@ export function InvoicePrintView({ invoice, business, onClose }) {
           </div>
 
           {/* Line Items Table */}
-          <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
-            <table className="w-full text-left text-xs">
+          <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200">
+            <table className="w-full min-w-[520px] text-left text-xs">
               <thead className="bg-slate-900 text-white">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Description / Vehicle Specifications</th>
@@ -282,7 +292,7 @@ export function InvoicePrintView({ invoice, business, onClose }) {
           </div>
 
           {/* Signatures & Footer */}
-          <div className="mt-10 grid grid-cols-2 gap-10 border-t border-slate-200 pt-8 text-center text-xs text-slate-500">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-10 print:grid-cols-2 border-t border-slate-200 pt-8 text-center text-xs text-slate-500">
             <div>
               <div className="mx-auto w-48 border-t border-slate-400 pt-1.5 font-semibold text-slate-700">
                 Customer Signature

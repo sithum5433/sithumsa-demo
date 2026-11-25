@@ -20,23 +20,23 @@ export function CompareBarAndModal({ compareIds, vehicles, business, onToggleCom
   return (
     <>
       {/* Floating bottom luxury compare tray */}
-      <div className="no-print fixed bottom-4 left-1/2 z-40 w-[calc(100%-2rem)] max-w-2xl -translate-x-1/2 rounded-2xl border border-[#D4AF37]/45 bg-[#07090E]/95 px-4 py-3 text-white shadow-2xl backdrop-blur-md">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#D4AF37]/20 text-[#E5C158]">
+      <div className="no-print fixed bottom-20 md:bottom-4 left-1/2 z-40 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-2xl -translate-x-1/2 rounded-2xl border border-[#D4AF37]/45 bg-[#07090E]/95 px-3 py-2.5 sm:px-4 sm:py-3 text-white shadow-2xl backdrop-blur-md">
+        <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3">
+          <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+            <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#D4AF37]/20 text-[#E5C158]">
               <Scale className="h-4 w-4" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="text-xs font-bold text-white">
                 Compare Vehicles ({selected.length}/3)
               </div>
-              <div className="text-[11px] text-slate-400 truncate max-w-xs sm:max-w-sm">
+              <div className="text-[11px] text-slate-400 truncate max-w-[175px] sm:max-w-sm">
                 {selected.map((v) => v.model).join(' vs ')}
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <button
               type="button"
               onClick={onClear}
@@ -47,9 +47,9 @@ export function CompareBarAndModal({ compareIds, vehicles, business, onToggleCom
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="btn-primary py-2 px-4 text-xs"
+              className="btn-primary py-2 px-3 sm:px-4 text-xs"
             >
-              Compare Side-by-Side
+              Compare <span className="hidden sm:inline">Side-by-Side</span>
             </button>
           </div>
         </div>
@@ -57,31 +57,35 @@ export function CompareBarAndModal({ compareIds, vehicles, business, onToggleCom
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-xs"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-950/80 p-0 sm:p-4 backdrop-blur-xs"
           onClick={() => setOpen(false)}
         >
           <div
-            className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-3xl border border-[#D4AF37]/30 bg-white shadow-2xl"
+            className="max-h-[92dvh] w-full max-w-5xl overflow-y-auto rounded-t-3xl sm:rounded-3xl border border-[#D4AF37]/30 bg-white shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between bg-[#07090E] px-6 py-4 text-white">
+            <div className="sticky top-0 z-10 flex items-center justify-between bg-[#07090E] px-4 py-3.5 sm:px-6 sm:py-4 text-white">
               <div>
                 <div className="text-[10px] font-bold tracking-[0.2em] text-[#E5C158] uppercase">
                   Side-by-Side Showroom Evaluation
                 </div>
-                <h3 className="font-serif-lux text-xl font-bold">Compare Selected Vehicles</h3>
+                <h3 className="font-serif-lux text-lg sm:text-xl font-bold">Compare Selected Vehicles</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-full bg-white/10 p-2 text-slate-300 hover:bg-white/20 cursor-pointer"
+                className="rounded-full bg-white/10 p-2.5 text-slate-300 hover:bg-white/20 cursor-pointer"
+                aria-label="Close comparison"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="overflow-x-auto p-6">
-              <table className="w-full min-w-[640px] text-left text-xs">
+            <div className="overflow-x-auto p-4 sm:p-6">
+              <div className="mb-2 text-[11px] font-medium text-slate-400 sm:hidden">
+                Swipe horizontally to compare specs →
+              </div>
+              <table className="w-full min-w-[600px] text-left text-xs">
                 <thead>
                   <tr className="border-b border-slate-200">
                     <th className="w-36 pb-4 font-bold text-slate-500 uppercase tracking-wider">

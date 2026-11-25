@@ -9,7 +9,7 @@ export function Footer({ business, onBookViewing }) {
 
   return (
     <footer id="contact" className="no-print border-t border-[#D4AF37]/20 bg-[#05070B] text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 pt-12 pb-24 md:py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-12">
           {/* Business Summary */}
           <div className="md:col-span-5">

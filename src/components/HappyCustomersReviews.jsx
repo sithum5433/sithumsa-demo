@@ -36,7 +36,7 @@ export function HappyCustomersReviews({ reviews, onNotify }) {
   };
 
   return (
-    <section id="reviews" className="border-t border-slate-200 bg-white py-16">
+    <section id="reviews" className="border-t border-slate-200 bg-white py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
@@ -44,7 +44,7 @@ export function HappyCustomersReviews({ reviews, onNotify }) {
               <Award className="h-3.5 w-3.5" />
               Showroom Handover Moments
             </div>
-            <h2 className="font-serif-lux mt-2 text-3xl font-bold text-slate-950 sm:text-4xl">
+            <h2 className="font-serif-lux mt-2 text-2xl sm:text-3xl font-bold text-slate-950 lg:text-4xl">
               Proud Sithumsa Owners &amp; Verified Stories
             </h2>
             <p className="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
@@ -54,7 +54,7 @@ export function HappyCustomersReviews({ reviews, onNotify }) {
           <button
             type="button"
             onClick={() => setShowForm((p) => !p)}
-            className="btn-secondary shrink-0"
+            className="btn-secondary w-full sm:w-auto shrink-0"
           >
             <MessageSquarePlus className="h-4 w-4 text-[#9A7418]" />
             {showForm ? 'Close Review Form' : 'Share Your Story'}
@@ -64,7 +64,7 @@ export function HappyCustomersReviews({ reviews, onNotify }) {
         {showForm && (
           <form
             onSubmit={handleSubmit}
-            className="mt-6 rounded-3xl border border-[#D4AF37]/40 bg-[#FAF9F5] p-6 shadow-sm"
+            className="mt-6 rounded-3xl border border-[#D4AF37]/40 bg-[#FAF9F5] p-5 sm:p-6 shadow-sm"
           >
             <input
               type="text"
@@ -129,11 +129,11 @@ export function HappyCustomersReviews({ reviews, onNotify }) {
                 />
               </div>
             </div>
-            <div className="mt-4 flex justify-end gap-2">
-              <button type="button" onClick={() => setShowForm(false)} className="btn-secondary">
+            <div className="mt-4 flex flex-col-reverse sm:flex-row justify-end gap-2">
+              <button type="button" onClick={() => setShowForm(false)} className="btn-secondary w-full sm:w-auto">
                 Cancel
               </button>
-              <button type="submit" disabled={submitting} className="btn-primary">
+              <button type="submit" disabled={submitting} className="btn-primary w-full sm:w-auto">
                 {submitting ? 'Submitting...' : 'Submit Review'}
               </button>
             </div>

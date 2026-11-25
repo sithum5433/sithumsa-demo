@@ -39,12 +39,12 @@ export function AdminLayout({
   return (
     <div className="min-h-screen bg-[#F4F3EF]">
       <header className="no-print sticky top-0 z-30 border-b border-[#D4AF37]/25 bg-[#05070B] text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2.5 sm:gap-4 px-4 py-2.5 sm:py-3 sm:px-6 lg:px-8">
+          <div className="flex min-w-0 items-center gap-3">
             <img
               src="./images/sithumsa-logo.jpg"
               alt="Sithumsa Enterprises"
-              className="h-9 w-auto object-contain"
+              className="h-8 sm:h-9 w-auto max-w-[135px] sm:max-w-[200px] object-contain"
             />
             <div className="hidden sm:block border-l border-white/15 pl-3">
               <div className="font-serif-lux text-sm font-bold text-white">
@@ -61,27 +61,31 @@ export function AdminLayout({
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <button
               type="button"
               onClick={onViewPublic}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 transition hover:bg-white/10 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 px-2.5 sm:px-3 py-2 text-xs font-semibold text-slate-200 transition hover:bg-white/10 cursor-pointer"
             >
               <ExternalLink className="h-3.5 w-3.5 text-[#E5C158]" />
-              Public Showroom
+              <span>
+                <span className="hidden sm:inline">Public </span>Showroom
+              </span>
             </button>
             <button
               type="button"
               onClick={onLogout}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-xs font-semibold text-rose-200 transition hover:bg-rose-500/20 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-rose-500/30 bg-rose-500/10 px-2.5 sm:px-3 py-2 text-xs font-semibold text-rose-200 transition hover:bg-rose-500/20 cursor-pointer"
             >
               <LogOut className="h-3.5 w-3.5" />
-              Sign Out
+              <span>
+                <span className="hidden sm:inline">Sign </span>Out
+              </span>
             </button>
           </div>
         </div>
 
-        <div className="mx-auto max-w-7xl overflow-x-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl overflow-x-auto no-scrollbar snap-x px-4 sm:px-6 lg:px-8">
           <nav className="flex gap-1.5 pb-2.5">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -91,7 +95,7 @@ export function AdminLayout({
                   key={item.id}
                   type="button"
                   onClick={() => onTabChange(item.id)}
-                  className={`inline-flex shrink-0 items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold transition cursor-pointer ${
+                  className={`inline-flex shrink-0 snap-start items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold transition cursor-pointer ${
                     active
                       ? 'bg-[#D4AF37] text-slate-950 shadow-sm'
                       : 'text-slate-300 hover:bg-white/10 hover:text-white'

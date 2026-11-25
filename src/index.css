@@ -37,9 +37,28 @@
     color-scheme: light;
   }
 
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
   body {
     font-family: "Urbanist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04";
+  }
+
+  button,
+  a {
+    touch-action: manipulation;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   .font-serif-lux {
@@ -78,7 +97,7 @@
   }
 
   .input-field {
-    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 shadow-xs transition focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 focus:outline-none;
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-base sm:text-sm text-slate-900 placeholder:text-slate-400 shadow-xs transition focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 focus:outline-none;
   }
 }
 

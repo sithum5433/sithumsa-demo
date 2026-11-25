@@ -334,32 +334,32 @@ export function PosTab({ vehicles, business, onReload, onNotify }) {
         </div>
 
         {/* Fees, Extras, Exchange & Leasing */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs space-y-4">
-          <div className="flex items-center justify-between">
+        <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-xs space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="font-display text-base font-bold text-slate-900">
               3. Fees, Trade-In Exchange &amp; Financing
             </h2>
-            <button type="button" onClick={addLineItem} className="btn-secondary py-1.5 px-3 text-xs">
+            <button type="button" onClick={addLineItem} className="btn-secondary py-2 px-3 text-xs">
               <Plus className="h-3.5 w-3.5" />
               Add Fee / Accessory
             </button>
           </div>
 
           {lineItems.map((item, idx) => (
-            <div key={idx} className="grid grid-cols-12 gap-2 items-center">
+            <div key={idx} className="grid grid-cols-6 sm:grid-cols-12 gap-2 items-center rounded-xl border border-slate-100 bg-slate-50/70 p-2 sm:border-0 sm:bg-transparent sm:p-0">
               <input
                 type="text"
                 placeholder="Item (e.g. RMV Transfer / Insurance)"
                 value={item.label}
                 onChange={(e) => updateLineItem(idx, 'label', e.target.value)}
-                className="input-field col-span-6"
+                className="input-field col-span-6 sm:col-span-5"
               />
               <input
                 type="number"
                 min={1}
                 value={item.qty}
                 onChange={(e) => updateLineItem(idx, 'qty', e.target.value)}
-                className="input-field col-span-2"
+                className="input-field col-span-2 sm:col-span-2"
                 aria-label="Quantity"
               />
               <input
@@ -368,13 +368,13 @@ export function PosTab({ vehicles, business, onReload, onNotify }) {
                 placeholder="Price"
                 value={item.unit_price}
                 onChange={(e) => updateLineItem(idx, 'unit_price', e.target.value)}
-                className="input-field col-span-3"
+                className="input-field col-span-3 sm:col-span-4"
                 aria-label="Unit price"
               />
               <button
                 type="button"
                 onClick={() => removeLineItem(idx)}
-                className="col-span-1 flex justify-center text-rose-600 hover:text-rose-800 cursor-pointer"
+                className="col-span-1 flex justify-center p-2 text-rose-600 hover:text-rose-800 cursor-pointer"
                 aria-label="Remove item"
               >
                 <Trash2 className="h-4 w-4" />
@@ -485,7 +485,7 @@ export function PosTab({ vehicles, business, onReload, onNotify }) {
 
       {/* Right Sticky POS Summary */}
       <div className="lg:col-span-4">
-        <div className="sticky top-28 rounded-3xl border border-slate-800 bg-slate-950 p-6 text-white shadow-2xl">
+        <div className="lg:sticky lg:top-28 rounded-3xl border border-slate-800 bg-slate-950 p-4 sm:p-6 text-white shadow-2xl">
           <div className="flex items-center gap-2 text-amber-400">
             <Receipt className="h-5 w-5" />
             <h3 className="font-display text-base font-bold">POS Live Calculation</h3>
@@ -530,7 +530,7 @@ export function PosTab({ vehicles, business, onReload, onNotify }) {
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2 text-xs text-white focus:border-amber-400 focus:outline-none"
+                className="mt-1 w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2.5 text-base sm:text-xs text-white focus:border-amber-400 focus:outline-none"
               >
                 <option value="Cash">Cash</option>
                 <option value="Bank Transfer">Bank Transfer</option>
@@ -558,7 +558,7 @@ export function PosTab({ vehicles, business, onReload, onNotify }) {
                 min={0}
                 value={amountPaid}
                 onChange={(e) => setAmountPaid(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2.5 text-sm font-bold text-white focus:border-amber-400 focus:outline-none"
+                className="mt-1 w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2.5 text-base sm:text-sm font-bold text-white focus:border-amber-400 focus:outline-none"
               />
             </div>
 

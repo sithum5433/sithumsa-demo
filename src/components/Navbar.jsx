@@ -21,13 +21,13 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
 
   return (
     <header className="no-print sticky top-0 z-40 border-b border-[#D4AF37]/20 bg-[#05070B]/95 text-white backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:gap-4 sm:px-6 sm:py-3 lg:px-8">
         {/* Brand Logo */}
         <a href="#top" className="group flex min-w-0 items-center" aria-label="Sithumsa Enterprise home">
           <img
             src="./images/sithumsa-logo.jpg"
             alt="Sithumsa Enterprises — Best One Vehicle Dealer"
-            className="h-12 w-auto max-w-[260px] object-contain transition duration-200 group-hover:brightness-110"
+            className="h-9 sm:h-12 w-auto max-w-[175px] sm:max-w-[260px] object-contain transition duration-200 group-hover:brightness-110"
           />
         </a>
 
@@ -44,7 +44,7 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
           ))}
         </nav>
 
-        {/* Actions */}
+        {/* Desktop Actions */}
         <div className="hidden items-center gap-2.5 md:flex">
           {shortlistCount > 0 && (
             <button
@@ -75,27 +75,49 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          type="button"
-          onClick={() => setMobileOpen((prev) => !prev)}
-          className="inline-flex items-center justify-center rounded-xl border border-white/15 p-2 text-slate-200 transition hover:bg-white/10 md:hidden cursor-pointer"
-          aria-label="Toggle navigation menu"
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        {/* Mobile Quick Actions + Menu Button */}
+        <div className="flex items-center gap-2 md:hidden">
+          {shortlistCount > 0 && (
+            <button
+              type="button"
+              onClick={onShowShortlist}
+              className="inline-flex items-center gap-1 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/15 px-2.5 py-2 text-xs font-bold text-[#F6E7C1] cursor-pointer"
+              aria-label="View saved vehicles"
+            >
+              <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" />
+              <span>{shortlistCount}</span>
+            </button>
+          )}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-xl bg-[#9E1B32] p-2.5 text-white shadow-xs"
+            aria-label="Chat on WhatsApp"
+          >
+            <MessageCircle className="h-4 w-4" />
+          </a>
+          <button
+            type="button"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            className="inline-flex items-center justify-center rounded-xl border border-white/15 p-2.5 text-slate-200 transition hover:bg-white/10 md:hidden cursor-pointer"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="border-t border-white/10 bg-[#05070B] px-4 py-4 md:hidden">
-          <div className="flex flex-col gap-1.5">
+        <div className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-white/10 bg-[#05070B] px-4 py-4 md:hidden">
+          <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="rounded-xl px-3 py-2.5 text-xs font-semibold tracking-wider text-slate-200 uppercase hover:bg-white/5 hover:text-[#E5C158]"
+                className="rounded-xl px-3 py-3 text-sm font-semibold tracking-wider text-slate-200 uppercase hover:bg-white/5 hover:text-[#E5C158]"
               >
                 {link.label}
               </a>
@@ -107,7 +129,7 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
                   setMobileOpen(false);
                   onBookViewing?.(null);
                 }}
-                className="btn-luxury-outline py-2.5 text-xs"
+                className="btn-luxury-outline py-3 text-xs"
               >
                 <CalendarCheck2 className="h-4 w-4" />
                 Book Viewing
@@ -116,7 +138,7 @@ export function Navbar({ business, shortlistCount = 0, onShowShortlist, onBookVi
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-crimson py-2.5 text-xs"
+                className="btn-crimson py-3 text-xs"
               >
                 <MessageCircle className="h-4 w-4" />
                 WhatsApp

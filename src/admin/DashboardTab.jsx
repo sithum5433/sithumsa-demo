@@ -62,29 +62,29 @@ export function DashboardTab({ dashboard, business, onNavigate }) {
             Issue POS invoices, track per-vehicle margins, manage VIP test-drive bookings, and download encrypted/offline backups.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <button type="button" onClick={() => onNavigate('pos')} className="btn-primary py-2.5 text-xs">
-            <Receipt className="h-4 w-4" />
+        <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:flex-wrap">
+          <button type="button" onClick={() => onNavigate('pos')} className="btn-primary py-2.5 px-3 text-xs">
+            <Receipt className="h-4 w-4 shrink-0" />
             New POS Invoice
           </button>
-          <button type="button" onClick={() => onNavigate('inventory')} className="btn-dark py-2.5 text-xs">
-            <Plus className="h-4 w-4" />
+          <button type="button" onClick={() => onNavigate('inventory')} className="btn-dark py-2.5 px-3 text-xs">
+            <Plus className="h-4 w-4 shrink-0" />
             Add Vehicle
           </button>
-          <button type="button" onClick={() => onNavigate('reports')} className="btn-secondary py-2.5 text-xs">
-            <BarChart3 className="h-4 w-4 text-[#9A7418]" />
+          <button type="button" onClick={() => onNavigate('reports')} className="btn-secondary py-2.5 px-3 text-xs">
+            <BarChart3 className="h-4 w-4 shrink-0 text-[#9A7418]" />
             Profit Reports
           </button>
-          <button type="button" onClick={() => onNavigate('customers')} className="btn-secondary py-2.5 text-xs">
-            <Camera className="h-4 w-4 text-[#9A7418]" />
+          <button type="button" onClick={() => onNavigate('customers')} className="btn-secondary py-2.5 px-3 text-xs">
+            <Camera className="h-4 w-4 shrink-0 text-[#9A7418]" />
             Add Buyer Photo
           </button>
-          <button type="button" onClick={downloadDemoBackupZip} className="btn-secondary py-2.5 text-xs">
-            <Download className="h-4 w-4 text-emerald-700" />
+          <button type="button" onClick={downloadDemoBackupZip} className="btn-secondary py-2.5 px-3 text-xs">
+            <Download className="h-4 w-4 shrink-0 text-emerald-700" />
             Backup ZIP
           </button>
-          <button type="button" onClick={() => onNavigate('security')} className="btn-secondary py-2.5 text-xs">
-            <ShieldCheck className="h-4 w-4 text-emerald-700" />
+          <button type="button" onClick={() => onNavigate('security')} className="btn-secondary py-2.5 px-3 text-xs">
+            <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-700" />
             2FA &amp; Audit
           </button>
         </div>
