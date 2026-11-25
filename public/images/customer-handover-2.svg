@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B1120"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <radialGradient id="emerald" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#0B1120" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#bg)"/>
+  <rect width="640" height="420" fill="url(#emerald)"/>
+  <ellipse cx="320" cy="336" rx="225" ry="18" fill="#020617" fill-opacity="0.8"/>
+  <path d="M104 232 L262 226 L278 158 C284 146 298 140 322 140 L424 140 C448 140 468 154 486 184 L516 224 L596 232 C614 238 622 254 620 282 L616 306 L572 306 C566 268 536 246 502 246 C468 246 438 268 432 306 L252 306 C246 268 216 246 182 246 C148 246 118 268 112 306 L104 302 Z" fill="#64748B" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="288" y="156" width="72" height="60" rx="5" fill="#0F172A"/>
+  <path d="M372 156 L422 156 C442 156 458 168 476 196 L490 216 L372 216 Z" fill="#0F172A"/>
+  <circle cx="182" cy="304" r="40" fill="#090D16" stroke="#334155" stroke-width="4"/>
+  <circle cx="182" cy="304" r="22" fill="#334155" stroke="#E2E8F0" stroke-width="2"/>
+  <circle cx="502" cy="304" r="40" fill="#090D16" stroke="#334155" stroke-width="4"/>
+  <circle cx="502" cy="304" r="22" fill="#334155" stroke="#E2E8F0" stroke-width="2"/>
+  <circle cx="484" cy="108" r="34" fill="#10B981"/>
+  <path d="M472 108 L481 117 L498 98" stroke="#0F172A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

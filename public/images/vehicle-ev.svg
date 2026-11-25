@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#060B16"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <radialGradient id="evGlow" cx="55%" cy="42%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="midnight" x1="130" y1="160" x2="680" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="50%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#evGlow)"/>
+  <ellipse cx="400" cy="378" rx="280" ry="24" fill="#000000" fill-opacity="0.82"/>
+  <path d="M136 318 C134 286 146 260 168 244 L224 228 L286 176 C310 160 342 154 388 154 L488 154 C530 154 562 172 596 208 L646 242 L696 254 C716 262 724 282 724 310 L720 342 C720 352 710 356 692 356 L656 356 C652 312 618 288 580 288 C542 288 508 312 504 356 L296 356 C292 312 258 288 220 288 C182 288 148 312 144 356 L136 356 Z" fill="url(#midnight)" stroke="#475569" stroke-width="2"/>
+  <path d="M248 228 L296 184 C314 172 336 168 372 168 L416 168 L416 228 Z" fill="#090D16"/>
+  <path d="M430 168 L484 168 C516 168 544 182 572 212 L592 228 L430 228 Z" fill="#090D16"/>
+  <!-- EV lightbar accent -->
+  <path d="M640 264 L718 268" stroke="#38BDF8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M142 264 L196 262" stroke="#F43F5E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="220" cy="354" r="45" fill="#090D16" stroke="#334155" stroke-width="4"/>
+  <circle cx="220" cy="354" r="29" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+  <circle cx="220" cy="354" r="8" fill="#F59E0B"/>
+  <circle cx="580" cy="354" r="45" fill="#090D16" stroke="#334155" stroke-width="4"/>
+  <circle cx="580" cy="354" r="29" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+  <circle cx="580" cy="354" r="8" fill="#F59E0B"/>
+</svg>

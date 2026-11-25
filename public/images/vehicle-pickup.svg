@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </linearGradient>
+    <linearGradient id="graphite" x1="120" y1="150" x2="700" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="50%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <ellipse cx="410" cy="384" rx="295" ry="26" fill="#000000" fill-opacity="0.78"/>
+  <!-- Sport roll bar in bed -->
+  <path d="M168 242 L245 170 L310 170 L310 242" stroke="#0F172A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pickup Body -->
+  <path d="M114 252 L310 246 L326 168 C332 154 346 148 372 148 L488 148 C514 148 534 162 554 196 L588 242 L688 250 C710 256 720 274 720 306 L718 336 L664 342 C656 296 620 270 582 270 C544 270 508 296 500 342 L292 342 C284 296 248 270 210 270 C172 270 136 296 128 342 L114 336 Z" fill="url(#graphite)" stroke="#94A3B8" stroke-width="2"/>
+  <rect x="336" y="164" width="84" height="72" rx="6" fill="#0F172A"/>
+  <path d="M432 164 L486 164 C508 164 524 176 544 206 L562 236 L432 236 Z" fill="#0F172A"/>
+  <path d="M674 260 L716 266 L714 286 L672 284 Z" fill="#FDE68A"/>
+  <rect x="116" y="256" width="16" height="36" rx="4" fill="#EF4444"/>
+  <!-- Heavy 4x4 Wheels -->
+  <circle cx="210" cy="348" r="52" fill="#090D16" stroke="#1E293B" stroke-width="6"/>
+  <circle cx="210" cy="348" r="30" fill="#334155" stroke="#94A3B8" stroke-width="3"/>
+  <circle cx="210" cy="348" r="9" fill="#F59E0B"/>
+  <circle cx="582" cy="348" r="52" fill="#090D16" stroke="#1E293B" stroke-width="6"/>
+  <circle cx="582" cy="348" r="30" fill="#334155" stroke="#94A3B8" stroke-width="3"/>
+  <circle cx="582" cy="348" r="9" fill="#F59E0B"/>
+</svg>

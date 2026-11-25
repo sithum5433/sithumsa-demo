@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <radialGradient id="gold" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#bg)"/>
+  <rect width="640" height="420" fill="url(#gold)"/>
+  <ellipse cx="320" cy="336" rx="220" ry="18" fill="#020617" fill-opacity="0.8"/>
+  <path d="M112 288 C110 260 120 236 140 222 L190 208 L244 162 C264 148 292 142 330 142 L442 142 C472 142 496 154 522 182 L564 214 L604 226 C622 232 628 248 626 274 L622 308 L586 308 C582 272 552 252 518 252 C484 252 454 272 450 308 L266 308 C262 272 232 252 198 252 C164 252 134 272 130 308 L112 308 Z" fill="#F1F5F9" stroke="#94A3B8" stroke-width="2"/>
+  <path d="M210 208 L254 168 L352 168 L352 208 Z" fill="#1E293B"/>
+  <path d="M366 168 L438 168 C462 168 486 180 510 208 L366 208 Z" fill="#1E293B"/>
+  <circle cx="198" cy="306" r="36" fill="#090D16" stroke="#334155" stroke-width="3"/>
+  <circle cx="198" cy="306" r="22" fill="#334155" stroke="#F8FAFC" stroke-width="2"/>
+  <circle cx="518" cy="306" r="36" fill="#090D16" stroke="#334155" stroke-width="3"/>
+  <circle cx="518" cy="306" r="22" fill="#334155" stroke="#F8FAFC" stroke-width="2"/>
+  <!-- Celebratory key handover emblem -->
+  <circle cx="484" cy="110" r="34" fill="#F59E0B"/>
+  <path d="M472 110 L481 119 L498 100" stroke="#0F172A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

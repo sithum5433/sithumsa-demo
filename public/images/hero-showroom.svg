@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#070B14"/>
+      <stop offset="55%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <radialGradient id="amberGlow" cx="50%" cy="32%" r="55%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.34"/>
+      <stop offset="55%" stop-color="#D97706" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floor" x1="0" y1="360" x2="0" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#05080F"/>
+    </linearGradient>
+    <linearGradient id="suvBody" x1="170" y1="220" x2="770" y2="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="35%" stop-color="#1E293B"/>
+      <stop offset="70%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="280" y1="220" x2="590" y2="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="680" y1="315" x2="930" y2="390" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#sky)"/>
+  <rect width="960" height="540" fill="url(#amberGlow)"/>
+  <!-- Architectural showroom trusses -->
+  <g stroke="#334155" stroke-opacity="0.38" stroke-width="1.5">
+    <line x1="80" y1="0" x2="80" y2="365"/>
+    <line x1="280" y1="0" x2="280" y2="365"/>
+    <line x1="480" y1="0" x2="480" y2="365"/>
+    <line x1="680" y1="0" x2="680" y2="365"/>
+    <line x1="880" y1="0" x2="880" y2="365"/>
+    <line x1="0" y1="90" x2="960" y2="90"/>
+    <line x1="0" y1="180" x2="960" y2="180"/>
+  </g>
+  <!-- Overhead showroom light bar -->
+  <rect x="220" y="54" width="520" height="6" rx="3" fill="#FDE68A" fill-opacity="0.85"/>
+  <rect x="260" y="64" width="440" height="14" rx="7" fill="#F59E0B" fill-opacity="0.18"/>
+  <!-- Floor -->
+  <rect x="0" y="365" width="960" height="175" fill="url(#floor)"/>
+  <line x1="0" y1="365" x2="960" y2="365" stroke="#F59E0B" stroke-opacity="0.28" stroke-width="1.5"/>
+  <!-- Headlight beam -->
+  <polygon points="735,305 955,345 955,445 725,335" fill="url(#beam)"/>
+  <!-- Shadow under vehicle -->
+  <ellipse cx="475" cy="398" rx="310" ry="24" fill="#000000" fill-opacity="0.72"/>
+  <!-- SUV Silhouette -->
+  <path d="M165 342 C162 315 170 288 188 272 L245 256 L305 208 C326 192 352 186 392 186 L545 186 C580 186 610 198 638 228 L690 264 L758 276 C780 281 792 298 792 325 L790 356 C790 368 780 374 764 374 L728 374 C724 328 690 302 652 302 C614 302 580 328 576 374 L366 374 C362 328 328 302 290 302 C252 302 218 328 214 374 L178 374 C166 374 165 362 165 342 Z" fill="url(#suvBody)" stroke="#64748B" stroke-width="2"/>
+  <!-- Windows -->
+  <path d="M270 256 L318 214 C334 202 354 198 386 198 L448 198 L448 258 L270 256 Z" fill="url(#glass)"/>
+  <path d="M462 198 L538 198 C566 198 592 208 616 232 L650 258 L462 258 L462 198 Z" fill="url(#glass)"/>
+  <!-- Shoulder highlight line -->
+  <path d="M202 282 C345 270 555 268 748 286" stroke="#FBBF24" stroke-opacity="0.55" stroke-width="2.2"/>
+  <!-- Headlight & Taillight -->
+  <path d="M726 286 L782 292 C787 297 788 306 780 310 L724 305 Z" fill="#FEF3C7"/>
+  <path d="M170 288 L212 286 L208 304 L167 303 Z" fill="#EF4444"/>
+  <!-- Grille -->
+  <rect x="760" y="316" width="28" height="28" rx="4" fill="#090D16" stroke="#475569"/>
+  <!-- Wheels -->
+  <g>
+    <circle cx="290" cy="370" r="50" fill="#0B0F19" stroke="#334155" stroke-width="4"/>
+    <circle cx="290" cy="370" r="34" fill="#1E293B" stroke="#94A3B8" stroke-width="2.5"/>
+    <circle cx="290" cy="370" r="11" fill="#F59E0B"/>
+    <path d="M290 338 L290 402 M258 370 L322 370 M267 347 L313 393 M313 347 L267 393" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="652" cy="370" r="50" fill="#0B0F19" stroke="#334155" stroke-width="4"/>
+    <circle cx="652" cy="370" r="34" fill="#1E293B" stroke="#94A3B8" stroke-width="2.5"/>
+    <circle cx="652" cy="370" r="11" fill="#F59E0B"/>
+    <path d="M652 338 L652 402 M620 370 L684 370 M629 347 L675 393 M675 347 L629 393" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
